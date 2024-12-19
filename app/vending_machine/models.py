@@ -114,6 +114,7 @@ class Maintenance:
 
                 drink = Drink(brand, price, quantity, subtype)
                 self._add_drink(drink)
+                clear_screen()
                 print(f"{drink.brand} {drink.subtype} is succesvol toegevoegd.\n")
 
             # Remove drink
@@ -125,6 +126,7 @@ class Maintenance:
                     if 0 <= index < len(drinks):
                         drink = drinks[index]
                         self._remove_drink(drink.brand, drink.subtype)
+                        clear_screen()
                         print(f"{drink.brand} {drink.subtype} is succesvol verwijderd.\n")
                     else:
                         print("Ongeldige keuze, terug naar menu.\n")
@@ -157,6 +159,7 @@ class Maintenance:
             # Restock all drinks
             elif choice == "5":
                 self._restock_all()
+                clear_screen()
                 print(f"Alle producten zijn bijgevuld tot {Drink.MAX_STOCK} stuks.\n")
 
             # Change price
@@ -172,6 +175,7 @@ class Maintenance:
                             price = float(input("Nieuwe prijs: (veelvoud van 0.10) \n> "))
                             if price * 100 % 10 == 0:
                                 drink.price = price
+                                clear_screen()
                                 print(f"{drink.brand} {drink.subtype} heeft nu een prijs van €{price:.2f}\n")
                             else:
                                 print("Ongeldige prijs, terug naar menu.\n")
