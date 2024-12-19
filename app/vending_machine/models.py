@@ -21,9 +21,16 @@ class Drink:
         self.quantity -= amount
 
     def increase_stock(self, amount: int):
+        """Increases the stock of a drink"""
         if self.quantity + amount > self.MAX_STOCK:
             raise ValueError(f"Can't have more than {self.MAX_STOCK} products of {self.brand} {self.subtype}")
         self.quantity += amount
+
+    def change_stock(self, amount: int):
+        """Changes the stock of a drink"""
+        if amount > self.MAX_STOCK:
+            raise ValueError(f"Can't have more than {self.MAX_STOCK} products of {self.brand} {self.subtype}")
+        self.quantity = amount
 
 
 class Inventory:
@@ -45,10 +52,12 @@ class Inventory:
         return self.drinks[key]
 
     def reduce_amount(self, brand: str, subtype: str = "", amount: int = 1):
+        """Reduces the amount of a drink in the inventory"""
         drink = self.get_drink(brand, subtype)
         drink.reduce_stock(amount)
 
     def is_in_stock(self, brand: str, subtype: str = "") -> bool:
+        """Checks if a drink is in stock"""
         drink = self.get_drink(brand, subtype)
         return drink.is_in_stock()
 
@@ -77,8 +86,8 @@ class Maintenance:
         print(self.inventory.drinks)
 
     def maintenance_menu(self):
+        """Displays the maintenance menu"""
         while True:
-            # Display maintenance menu
             print("Onderhoudsmenu:")
             print("1. Voeg product toe")
             print("2. Verwijder product")
@@ -130,7 +139,7 @@ class Maintenance:
                         drink = drinks[index]
                         try:
                             quantity = int(input("Nieuwe hoeveelheid: "))
-                            drink.quantity = quantity
+                            drink.change_stock(quantity)
                         except ValueError:
                             print("Ongeldige invoer, terug naar menu.\n")
                 except ValueError:
