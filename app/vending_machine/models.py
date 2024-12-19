@@ -114,6 +114,7 @@ class Maintenance:
 
                 drink = Drink(brand, price, quantity, subtype)
                 self._add_drink(drink)
+                print(f"{drink.brand} {drink.subtype} is succesvol toegevoegd.\n")
 
             # Remove drink
             elif choice == "2":
@@ -124,6 +125,7 @@ class Maintenance:
                     if 0 <= index < len(drinks):
                         drink = drinks[index]
                         self._remove_drink(drink.brand, drink.subtype)
+                        print(f"{drink.brand} {drink.subtype} is succesvol verwijderd.\n")
                     else:
                         print("Ongeldige keuze, terug naar menu.\n")
                 except ValueError as e:
@@ -140,6 +142,7 @@ class Maintenance:
                         try:
                             quantity = int(input("Nieuwe hoeveelheid: "))
                             drink.change_stock(quantity)
+                            print(f"{drink.brand} {drink.subtype} heeft nu {quantity} stuks.\n")
                         except ValueError:
                             print("Ongeldige invoer, terug naar menu.\n")
                 except ValueError:
@@ -154,6 +157,7 @@ class Maintenance:
             # Restock all drinks
             elif choice == "5":
                 self._restock_all()
+                print(f"Alle producten zijn bijgevuld tot {Drink.MAX_STOCK} stuks.\n")
 
             # Change price
             elif choice == "6":
@@ -168,6 +172,7 @@ class Maintenance:
                             price = float(input("Nieuwe prijs: (veelvoud van 0.10) \n> "))
                             if price * 100 % 10 == 0:
                                 drink.price = price
+                                print(f"{drink.brand} {drink.subtype} heeft nu een prijs van €{price:.2f}\n")
                             else:
                                 print("Ongeldige prijs, terug naar menu.\n")
                         # Invalid price
