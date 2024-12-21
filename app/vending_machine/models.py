@@ -107,6 +107,8 @@ class Maintenance:
                     price: float = float(input("Prijs (veelvoud van 0.10): "))
                     if price * 100 % 10 != 0:
                         raise ValueError("Prijs moet een veelvoud van 0.10 zijn.")
+                    if price < 0:
+                        raise ValueError("Prijs moet positief zijn.")
                     quantity: int = int(input("Aantal: "))
                 except ValueError:
                     print("Ongeldige invoer, terug naar menu.\n")
